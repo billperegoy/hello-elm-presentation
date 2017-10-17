@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>reveal.js – The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Hello Elm</h1>
+          <h3>Bootstrapping an App Using Elmk</h3>
+          <p>
+            <small>Created by <a href="https://becoming-fuctional.com">Bill
+                Peregoy</a> / <a
+                href="http://twitter.com/billperegoy">@billperegoy</a></small>
+          </p>
+        </section>
+
+        <section>
+          <h2>What is Elm?</h2>
+          <ul>
+            <li>Fully Functional Language</li>
+            <li>Strongly Typed</li>
+            <li>Immutable Data</li>
+            <li>Controlled Use of Side Effects</li>
+            <li>One-way Data Flow</li>
+            <li>Fantastic Error Messages</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Who Cares?</h1>
+          <h2 class="fragment">How does it allow me to build better web apps?</h1>
+          <h2 class="fragment">Let's build one and see</h1>
+        </section>
+
+        <section>
+          <h2>Basic Elm Syntax</h2>
+          <ul>
+            <li>Functions</li>
+            <li>Basic Data Structures</h2>
+            <li>Functional Transforms</h1>
+            <li>Elm Html Library</h1>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Functions</h2>
+          <pre><code class="haskell">
+add a b =
+    a + b
+
+add 2 3
+=> 5
+         </code></pre>
+         <ul>
+           <li>Functions must return exactly one value</li>
+           <li>Functions have no side-effects</li>
+         </ul>
+        </section>
+        <section>
+          <h2>Functions</h2>
+         </code></pre>
+          <pre><code class="haskell">
+squareOfSum a b =
+  let
+      sum = a + b
+  in
+      sum * sum  
+
+squareofSum 2 3
+=> 25
+         </code></pre>
+         <ul>
+           <li>Functions can contain local, intermediate functions</li>
+         </ul>
+        </section>
+        <section>
+          <h2>Functions</h2>
+         </code></pre>
+          <pre><code class="haskell">
+lambda =
+    \a b -> a + b
+
+lambda 3 5
+=> 8
+         </code></pre>
+         <ul>
+           <li>This is an anonymous function (lambda)</li>
+           <li>Functions can consume and return other functions</li>
+         </ul>
+        </section>
+        </section>
+
+        <section>
+          <h2>Lists</h2>
+          <pre><code class="haskell">
+myList = [2, 3,4]
+=> [2, 3, 4]
+
+newList = 1 :: myList
+=> [1, 2, 3, 4]
+
+myList ++ newList
+=> [1, 2, 3, 4, 2, 3, 4]
+         </code></pre>
+        </section>
+
+        <section>
+          <h2>Records</h2>
+          <pre><code class="haskell">
+type alias Person =
+    { name : String
+    , age : Int
+    }
+
+p1 = Person "James" 23
+p2 = { name = "Jane", age = 25 }
+
+p1.name 
+=> "James"
+
+p3 = { p2 | age = 35 }
+=>  { name = "Jane", age = 35 }
+         </code></pre>
+        </section>
+
+        <section>
+          <h2>Functional Transforms</h2>
+          <pre><code class="haskell">
+numbers = [1, 2, 3]
+
+List.map (\elem -> elem * elem) numbers
+=> [1, 4, 9]
+
+List.filter (\elem -> elem > 2) numbers
+=> [3]
+
+numbers |> List.map (\elem -> elem * elem)
+=> [1, 4, 9]
+
+         </code></pre>
+        </section>
+
+        <section>
+          <h2>Elm Html Lib</h2>
+
+          <ul>
+            <li>Every Html element has a corresponding function</li>
+            <li>Each function takes two paramaters</li>
+            <ul>
+            <li>First param is a list of Html attributes</li>
+            <li>Second param is a list of Html sub-elements</li>
+            </ul>
+            <li>Function nesting can be arbitrarily deep</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Examples</h2>
+          <pre><code class="haskell">
+h1 [ class "alert"] [ text "Alert Text" ]
+
+div [ class "container", id "main-content" ] 
+    [ p [] [ text "paragraph 1" ]
+    , p [] [ text "paragraph 2" ]
+    ]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2> That's It!</h2>
+          <h3>With this little bit of Elm knowledge, we can start our app</h3>
+        </section>
+
+        <section>
+          <h2>Hello Elm</h2>
+          <pre><code class="haskell">
+module Main exposing (..)
+
+import Html exposing (..)
+
+
+main =
+    h1 []
+        [ text ("Hello, Elm!") ]
+          </code></pre>
+          <ul>
+            <li>Every Elm app has a top-level function named main</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Compiling</h2>
+          <pre><code class="bash">
+elm-make Main.elm --output bundle.js 
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Embedding in a Page</h2>
+          <h4>In the HTML head</h4>
+          <pre><code class="html">
+  <script type="text/javascript" src="bundle.js"></script>
+          </code></pre>
+
+          <h4>In the HTML body</h4>
+          <pre><code class="html">
+  <div id="elm-app"></div> 
+
+  <script type="text/javascript">
+    var elmDiv = document.getElementById('elm-app');
+    Elm.Main.embed(elmDiv);
+  </script>
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Our App Header</h2>
+          <pre><code class="html">
+main =
+    div [ class "jumbotron" ]
+        [ div [ class "container text-center" ]
+            [ h1 [] [ text "Elm Todo List" ]
+            ]
+        ]
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/step-01.png"></img>
+        </section>
+
+        <section>
+          <h2>Our Page Layout</h2>
+          <pre><code class="haskell">
+main =
+    div []
+        [ div [ class "jumbotron" ]
+            [ div [ class "container text-center" ]
+                [ h1 [] [ text "Elm Todo List" ] ]
+            ]
+        , div
+            [ class "row" ]
+            [ div [ class "col-md-3" ] [ text "sidebar" ]
+            , div [ class "col-md-9" ] [ text "main content" ]
+            ]
+        ]
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/step-03."></img>
+        </section>
+
+        <section>
+          <h2>Now Let's Refactor</h2>
+          <ul>
+            <li>Evenything is a function</li>
+            <li>We can buid "partials" with just functions</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Refactoring</h2>
+          <pre><code class="haskell">
+main =
+    div []
+        [ header
+        , mainBody
+        ]
+
+header =
+    div [ class "jumbotron" ]
+        [ div [ class "container text-center" ]
+            [ h1 [] [ text "Elm Todo List" ] ]
+        ]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Refactoring</h2>
+          <pre><code class="haskell">
+mainBody =
+    div
+        [ class "row" ]
+        [ sidebar
+        , content
+        ]
+
+sidebar =
+    div [ class "col-md-3" ] [ text "sidebar" ]
+
+content =
+    div [ class "col-md-9" ] [ text "main content" ]
+          </code></pre>
+
+        </section>
+
+        <section>
+          <h2>Creating a Data Model</h2>
+          <pre><code class="haskell">
+type alias TodoItem =
+    { id : Int
+    , description : String
+    , completed : Bool
+    }
+
+
+type alias Model =
+    { nextId : Int
+    , items : List TodoItem
+    }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Creating Seed Data</h2>
+          <pre><code class="haskell">
+item2 =
+    TodoItem 2 "Clean litter box" False
+
+
+initModel =
+    [ TodoItem 1 "Take out trash" False
+    , item2
+    , TodoItem 3 "Finish meetup talk" True
+    ]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Display a single Todo</h2>
+          <pre><code class="haskell">
+singleItem item =
+    let
+        singleCheckBox item =
+            input
+                [ style [ ( "margin-right", "8px" ) ]
+                , type_ "checkbox"
+                , checked item.completed
+                ]
+                []
+    in
+        div [ class "alert alert-success" ]
+            [ singleCheckBox item
+            , text item.description
+            ]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Add content to our page</h2>
+          <pre><code class="haskell">
+content =
+    div [ class "col-md-9" ] [ singleItem item2 ]
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/step-06.png"></img>
+        </section>
+
+        <section>
+          <h2>Render all Todos</h2>
+          <pre><code class="haskell">
+content model =
+    div [ class "col-md-9" ]
+        (List.map
+            (\item -> singleItem item)
+            model.items
+        )
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Pass Model as Param</h2>
+          <pre><code class="haskell">
+main =
+    div []
+        [ header
+        , mainBody initModel
+        ]
+
+
+mainBody model =
+    div
+        [ class "row container" ]
+        [ sidebar
+        , content model
+        ]
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/step-07.png"></img>
+        </section>
+
+        <section>
+          <h1>Now Let's Make It Do Something</h2>
+        </section>
+
+        <section>
+          <h1>Elm Architecture</h1>
+          <h4>Elm Apps Use a Common Architecture</h4>
+          <ul>
+            <li>Model - All Data for the App</li>
+            <li>View - Builds HTML from data in Model</li>
+            <li>Update - A Function that Updates a Model</li>
+          </ul>
+
+        </section>
+        <section>
+          <h1>Tying it Together</h1>
+          <pre><code class="haskell">
+main =
+    Html.beginnerProgram
+        { model = initModel
+        , update = update
+        , view = view
+        }
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Tying it Together</h1>
+          <pre><code class="haskell">
+update msg model =
+    model
+
+view model =
+    div []
+        [ header
+        , mainBody initModel
+        ]
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/step-07.png"></img>
+        </section>
+
+        <section>
+          <h1>Adding Actions</h1>
+        </section>
+
+        <section>
+          <h1>Adding a Form</h1>
+          <pre><code class="haskell">
+sidebar =
+    div [ class "col-md-3" ]
+        [ div []
+            [ text "New Todo"
+            , input [ style [ ( "margin-bottom", "10px" ) ] ] []
+            , button [ class "btn btn-default" ] [ text "Submit" ]
+            ]
+        ]
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/step-09.png"></img>
+        </section>
+
+
+        <section>
+          <h1>Defining Message Types</h1>
+          <pre><code class="haskell">
+type Msg
+    = UpdateTodoInput String
+    | CreateTodo
+          </code></pre>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
